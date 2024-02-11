@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+     <script
+        src="https://unpkg.com/htmx.org@1.9.10"
+      ></script>
+      <link  href="./main.css" rel="stylesheet"/>
+    <title>Email Generator</title>
+  </head>
+  <div class="bg-violet-50">
+    <h2 class="text-violet-400 font-sans p-8">Email Generator</h2>
+  </div>
+  <body>
+    <div id="mainContent" class="bg-violet-400 text-gray font-sans p-8">
+      <form hx-post="/email/process">
+        <div class="mb-2">
+          <label for="email-content" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email content/Text:</label>
+          <textarea id="email-content" name="emailContent" rows="4" maxlength="150" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Paste your email here..."></textarea>
+        </div>
+        <div class="mb-2">
+          <label for="answer-style" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select an option</label>
+          <select id="answer-style" name="answerStyle" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+            <option selected>Choose answer style</option>
+            <option value="formal">Formal</option>
+            <option value="neutral">Neutral</option>
+            <option value="casual">Casual</option>
+          </select>
+        </div>
+        <button class="px-5 py-2.5 text-center me-2 mb-2">Generate answer</button>
+      </form>
+    </div>
+      {{message}}
+  </body>
+</html>
