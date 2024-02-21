@@ -4,7 +4,7 @@
 
 @layer base{
     button {
-        background-color: rgb(91, 71, 148);
+        background-color: rgb(56, 93, 161);
         text-align: center;
         text-decoration: none;
         color: rgb(255 255 255);
@@ -30,6 +30,13 @@
         font-size: 1.875rem; /* 30px */
         line-height: 2.25rem; /* 36px */
         text-align: center;
+        color: indigo;
+    }
+
+    h1 {
+        font-weight: 300;
+        margin-bottom: 1rem;
+        text-align: left;
     }
 
     .htmx-indicator{

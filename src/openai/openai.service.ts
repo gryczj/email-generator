@@ -24,16 +24,16 @@ export class OpenaiService {
   private getStyle(style: AnswerStyle): string {
     switch (style) {
       case AnswerStyle.Casual: {
-        return 'Generate casual email with the answer to following email. Use the same language';
+        return 'Generate casual email with the answer to following email using the same language.';
       }
       case AnswerStyle.Neutral: {
-        return 'Generate email as an answer in neutral style to following email. Use the same language';
+        return 'Generate email as an answer in neutral style to following email using the same language.';
       }
       case AnswerStyle.Formal: {
-        return 'Generate formal email as an answer to following email. Use the same language';
+        return 'Generate formal email as an answer to following email using the same language.';
       }
       default: {
-        return 'Answer to following email as you want. Use the same language';
+        return 'Answer to following email as you want using the same language.';
       }
     }
   }

@@ -6,7 +6,9 @@ import { AnswerStyle } from 'src/enums';
 @Controller('email')
 export class EmailController {
   private answers: string[] = [];
-  constructor(private emailService: EmailService) {}
+  constructor(private emailService: EmailService) {
+    this.answers = [];
+  }
 
   @Post('process')
   async process(
@@ -20,7 +22,7 @@ export class EmailController {
 
     this.answers.push(answer);
 
-    console.log('ANSWRER', answer);
+    console.log(answer);
 
     return res.render('answer', {
       answers: this.answers,

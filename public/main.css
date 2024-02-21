@@ -476,9 +476,19 @@ video {
   border-color: #e5e7eb;
 }
 
+.dark [role="tooltip"] > [data-popper-arrow]:before {
+  border-style: solid;
+  border-color: #4b5563;
+}
+
 [role="tooltip"] > [data-popper-arrow]:after {
   border-style: solid;
   border-color: #e5e7eb;
+}
+
+.dark [role="tooltip"] > [data-popper-arrow]:after {
+  border-style: solid;
+  border-color: #4b5563;
 }
 
 [data-popover][role="tooltip"][data-popper-placement^='top'] > [data-popper-arrow]:before {
@@ -675,6 +685,11 @@ select:not([size]) {
   background-size: 1em 1em;
 }
 
+.dark [type='radio']:checked {
+  background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3ccircle cx='8' cy='8' r='3'/%3e%3c/svg%3e");
+  background-size: 1em 1em;
+}
+
 [type='checkbox']:indeterminate {
   background-image: url("data:image/svg+xml,%3csvg aria-hidden='true' xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 16 12'%3e %3cpath stroke='white' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='M1 5.917 5.724 10.5 15 1.5'/%3e %3c/svg%3e");
   background-color: currentColor;
@@ -729,6 +744,15 @@ input[type=file]::file-selector-button:hover {
   padding-left: 1rem;
 }
 
+.dark input[type=file]::file-selector-button {
+  color: white;
+  background: #4B5563;
+}
+
+.dark input[type=file]::file-selector-button:hover {
+  background: #6B7280;
+}
+
 input[type="range"]::-webkit-slider-thumb {
   height: 1.25rem;
   width: 1.25rem;
@@ -743,6 +767,10 @@ input[type="range"]::-webkit-slider-thumb {
 
 input[type="range"]:disabled::-webkit-slider-thumb {
   background: #9CA3AF;
+}
+
+.dark input[type="range"]:disabled::-webkit-slider-thumb {
+  background: #6B7280;
 }
 
 input[type="range"]:focus::-webkit-slider-thumb {
@@ -771,6 +799,10 @@ input[type="range"]:disabled::-moz-range-thumb {
   background: #9CA3AF;
 }
 
+.dark input[type="range"]:disabled::-moz-range-thumb {
+  background: #6B7280;
+}
+
 input[type="range"]::-moz-range-progress {
   background: #3F83F8;
 }
@@ -780,7 +812,7 @@ input[type="range"]::-ms-fill-lower {
 }
 
 button {
-  background-color: rgb(91, 71, 148);
+  background-color: rgb(56, 93, 161);
   text-align: center;
   text-decoration: none;
   color: rgb(255 255 255);
@@ -813,6 +845,13 @@ h2 {
   line-height: 2.25rem;
   /* 36px */
   text-align: center;
+  color: indigo;
+}
+
+h1 {
+  font-weight: 300;
+  margin-bottom: 1rem;
+  text-align: left;
 }
 
 .htmx-indicator{
@@ -931,6 +970,11 @@ h2 {
   z-index: 40;
 }
 
+.mx-auto {
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .mb-2 {
   margin-bottom: 0.5rem;
 }
@@ -957,6 +1001,10 @@ h2 {
 
 .h-9 {
   height: 2.25rem;
+}
+
+.h-full {
+  height: 100%;
 }
 
 .w-1\/2 {
@@ -1026,9 +1074,9 @@ h2 {
   border-color: rgb(209 213 219 / var(--tw-border-opacity));
 }
 
-.bg-gray-100 {
+.bg-blue-400 {
   --tw-bg-opacity: 1;
-  background-color: rgb(243 244 246 / var(--tw-bg-opacity));
+  background-color: rgb(118 169 250 / var(--tw-bg-opacity));
 }
 
 .bg-gray-200 {
@@ -1041,18 +1089,8 @@ h2 {
   background-color: rgb(249 250 251 / var(--tw-bg-opacity));
 }
 
-.bg-violet-400 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(167 139 250 / var(--tw-bg-opacity));
-}
-
-.bg-violet-50 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(245 243 255 / var(--tw-bg-opacity));
-}
-
-.fill-violet-400 {
-  fill: #a78bfa;
+.fill-blue-400 {
+  fill: #76A9FA;
 }
 
 .p-2 {
@@ -1090,9 +1128,18 @@ h2 {
   font-family: ui-sans-serif, system-ui;
 }
 
+.text-2xl {
+  font-size: 1.5rem;
+  line-height: 2rem;
+}
+
 .text-sm {
   font-size: 0.875rem;
   line-height: 1.25rem;
+}
+
+.font-bold {
+  font-weight: 700;
 }
 
 .font-medium {
@@ -1112,6 +1159,11 @@ h2 {
   color: rgb(0 0 0 / var(--tw-text-opacity));
 }
 
+.text-blue-400 {
+  --tw-text-opacity: 1;
+  color: rgb(118 169 250 / var(--tw-text-opacity));
+}
+
 .text-gray-200 {
   --tw-text-opacity: 1;
   color: rgb(229 231 235 / var(--tw-text-opacity));
@@ -1122,9 +1174,9 @@ h2 {
   color: rgb(17 24 39 / var(--tw-text-opacity));
 }
 
-.text-violet-400 {
+.text-white {
   --tw-text-opacity: 1;
-  color: rgb(167 139 250 / var(--tw-text-opacity));
+  color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
 .shadow-lg {
