@@ -1,14 +1,10 @@
-import { Controller, Get, Render, Res } from '@nestjs/common';
-import { Response } from 'express';
-import { AppService } from './app.service';
+import { Controller, Get, Render } from '@nestjs/common';
 
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) {}
+  constructor() {}
 
   @Get()
   @Render('index')
-  root(@Res() res: Response): void {
-    //  return { form: res.render('form')};
-  }
+  root(): void {}
 }

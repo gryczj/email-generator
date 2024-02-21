@@ -18,8 +18,6 @@ export class OpenaiService {
     const result = await this.model.invoke(
       `${this.getStyle(style)} + \n + ${email}`,
     );
-    console.log(result);
-
     return result.content.toString();
   }
 
