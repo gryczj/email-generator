@@ -23,12 +23,14 @@ export class OpenaiService {
     });
   }
 
-  async sendEmail(email: string, style: AnswerStyle) {
-    const result = await this.model.invoke(`${this.getStyle(style)}\n${email}`);
+  async sendMessage(email: string, style: AnswerStyle): Promise<string> {
+    const result = await this.model.invoke(
+      `${this.getContext(style)}\n${email}`,
+    );
     return result.content.toString();
   }
 
-  private getStyle(style: AnswerStyle): string {
+  private getContext(style: AnswerStyle): string {
     switch (style) {
       case AnswerStyle.Casual: {
         return casual_message;

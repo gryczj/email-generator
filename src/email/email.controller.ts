@@ -7,12 +7,12 @@ import { AnswerStyle } from 'src/enums';
 export class EmailController {
   constructor(private emailService: EmailService) {}
 
-  @Post('process')
-  async process(
+  @Post('send')
+  async send(
     @Body() body: { emailContent: string; answerStyle: AnswerStyle },
     @Res() res: Response,
-  ): Promise<any> {
-    const answer = await this.emailService.sendEmail(
+  ): Promise<void> {
+    const answer = await this.emailService.send(
       body.emailContent,
       body.answerStyle,
     );
