@@ -1,7 +1,7 @@
 ## Description
 
 This project is used to generate a response to a given email based on selected style: `[formal, neutral, casual]`. 
-It is based on LangChain framework and ChatOpenAI model. 
+It is based on `LangChain` framework and `ChatOpenAI` model. 
 Technology stack: `Nest.js` + `htmx`.
 
 ## Installation
