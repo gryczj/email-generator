@@ -20,12 +20,12 @@ export class EmailController {
       body.answerStyle,
     );
 
-    this.answers.push(answer);
+    // this.answers.push(answer);
 
     console.log(answer);
 
     return res.render('answer', {
-      answers: this.answers,
+      answer,
     });
   }
 }

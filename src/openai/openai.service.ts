@@ -2,6 +2,16 @@ import { Injectable } from '@nestjs/common';
 import { ChatOpenAI } from '@langchain/openai';
 import { AnswerStyle } from 'src/enums';
 
+const casual_message =
+  'Wygeneruj luźną odpowiedź w formie emaila używając tego samego języka.';
+const neutral_message =
+  'Wygeneruj formalną odpowiedź w formie emaila używając tego samego języka.';
+const formal_message =
+  'Wygeneruj formalną odpowiedź w formie emaila używając tego samego języka.';
+const default_message =
+  'Wygeneruj odpowiedź o dowolnym stylu w formie emaila używając tego samego języka.';
+const context = 'Odpowiadaj tylko, gdy mail zostanie przesłany.';
+
 @Injectable()
 export class OpenaiService {
   private model: ChatOpenAI;
@@ -15,25 +25,23 @@ export class OpenaiService {
   }
 
   async sendEmail(email: string, style: AnswerStyle) {
-    const result = await this.model.invoke(
-      `${this.getStyle(style)} + \n + ${email}`,
-    );
+    const result = await this.model.invoke(`${this.getStyle(style)}\n${email}`);
     return result.content.toString();
   }
 
   private getStyle(style: AnswerStyle): string {
     switch (style) {
       case AnswerStyle.Casual: {
-        return 'Generate casual email with the answer to following email using the same language.';
+        return casual_message;
       }
       case AnswerStyle.Neutral: {
-        return 'Generate email as an answer in neutral style to following email using the same language.';
+        return neutral_message;
       }
       case AnswerStyle.Formal: {
-        return 'Generate formal email as an answer to following email using the same language.';
+        return formal_message;
       }
       default: {
-        return 'Answer to following email as you want using the same language.';
+        return default_message;
       }
     }
   }
