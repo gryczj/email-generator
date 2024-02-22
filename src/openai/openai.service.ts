@@ -5,12 +5,11 @@ import { AnswerStyle } from 'src/enums';
 const casual_message =
   'Wygeneruj luźną odpowiedź w formie emaila używając tego samego języka.';
 const neutral_message =
-  'Wygeneruj formalną odpowiedź w formie emaila używając tego samego języka.';
+  'Wygeneruj neutralną odpowiedź w formie emaila używając tego samego języka.';
 const formal_message =
   'Wygeneruj formalną odpowiedź w formie emaila używając tego samego języka.';
 const default_message =
-  'Wygeneruj odpowiedź o dowolnym stylu w formie emaila używając tego samego języka.';
-const context = 'Odpowiadaj tylko, gdy mail zostanie przesłany.';
+  'Wygeneruj odpowiedź w dowolnym stylu w formie emaila używając tego samego języka.';
 
 @Injectable()
 export class OpenaiService {
