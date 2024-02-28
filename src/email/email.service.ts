@@ -4,7 +4,11 @@ import { OpenaiService } from 'src/openai/openai.service';
 
 @Injectable()
 export class EmailService {
-  constructor(private openaiService: OpenaiService) {}
+  openaiService: OpenaiService;
+
+  constructor() {
+     this.openaiService = new OpenaiService()
+  }
 
   async send(email: string, style: AnswerStyle): Promise<string> {
     return this.openaiService.sendMessage(email, style);

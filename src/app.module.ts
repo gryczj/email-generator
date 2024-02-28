@@ -9,6 +9,7 @@ import { AuthModule } from './auth/auth.module';
 import { PostgresDialect } from 'kysely';
 import { Pool } from 'pg';
 import { KyselyModule } from 'nestjs-kysely';
+import { JwtModule } from '@nestjs/jwt';
 
 @Module({
   imports: [
@@ -24,6 +25,11 @@ import { KyselyModule } from 'nestjs-kysely';
           database: process.env.POSTGRES_DB,
         }),
       }),
+    }),
+    JwtModule.register({
+      global: true,
+      secret: process.env.SECRET_JWT,
+      signOptions: { expiresIn: '7d' },
     }),
   ],
   controllers: [AppController, EmailController],
