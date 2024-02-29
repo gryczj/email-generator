@@ -4,6 +4,7 @@ import { AuthService } from './auth.service';
 import { UsersRepository } from './users.repository';
 
 @Module({
+  exports: [UsersRepository],
   controllers: [AuthController],
   providers: [AuthService, UsersRepository],
 })

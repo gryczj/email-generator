@@ -15,19 +15,21 @@ const default_message =
 export class OpenaiService {
   private model: ChatOpenAI;
 
-  constructor() {
+  constructor() {}
+
+  create(apiKey: string) {
     this.model = new ChatOpenAI({
       modelName: 'gpt-3.5-turbo',
       temperature: 0.9,
-      openAIApiKey: process.env.OPENAI_API_KEY,
+      openAIApiKey: apiKey,
     });
   }
 
   async sendMessage(email: string, style: AnswerStyle): Promise<string> {
-    const result = await this.model.invoke(
+    const result = await this.model?.invoke(
       `${this.getContext(style)}\n${email}`,
     );
-    return result.content.toString();
+    return result?.content.toString();
   }
 
   private getContext(style: AnswerStyle): string {

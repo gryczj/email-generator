@@ -6,7 +6,10 @@ import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
 export class AuthService {
-  constructor(private usersRepository: UsersRepository, private jwtService: JwtService) {}
+  constructor(
+    private usersRepository: UsersRepository,
+    private jwtService: JwtService,
+  ) {}
 
   async register({
     username,
@@ -17,10 +20,12 @@ export class AuthService {
     await this.usersRepository.save(username, hash, openAIKey);
   }
 
-  async login({ username, password }: LoginDTO): Promise<{ access_token: string }> {
+  async login({
+    username,
+    password,
+  }: LoginDTO): Promise<{ access_token: string }> {
     const user = await this.usersRepository.find(username);
-
-    if (!(await bcrypt.compare(password, user.pwd))) {
+    if (!user || !(await bcrypt.compare(password, user.pwd))) {
       throw new UnauthorizedException();
     }
 
@@ -28,6 +33,17 @@ export class AuthService {
 
     return {
       access_token: await this.jwtService.signAsync(payload),
+    };
+  }
+
+  async getUserInfo(
+    username: string,
+  ): Promise<{ username: string; openAIKey: string }> {
+    const user = await this.usersRepository.find(username);
+
+    return {
+      username: user.username,
+      openAIKey: user.open_ai_key,
     };
   }
 }
