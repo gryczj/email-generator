@@ -24,8 +24,13 @@ export class AuthController {
     @Body() registrationDTO: RegistrationDTO,
     @Res() res: Response,
   ): Promise<void> {
-    await this.authService.register(registrationDTO);
-    res.redirect('/loginView');
+    try {
+      await this.authService.register(registrationDTO);
+      res.redirect('/loginView');
+    } catch (error) {
+      res.status(409).json({ error });
+      console.error(error);
+    }
   }
 
   @Post('login')
@@ -34,9 +39,14 @@ export class AuthController {
     @Body() loginDTO: LoginDTO,
     @Res() res: Response,
   ): Promise<void> {
-    const token = await this.authService.login(loginDTO);
-    res.set('Authorization', 'Bearer ' + token.access_token);
-    res.render('email-form');
+    try {
+      const token = await this.authService.login(loginDTO);
+      res.set('Authorization', 'Bearer ' + token.access_token);
+      res.render('email-form');
+    } catch (error) {
+      res.status(401).json({ error });
+      console.error(error);
+    }
   }
 
   @Get('logout')

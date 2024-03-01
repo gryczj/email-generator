@@ -1,26 +1,87 @@
-
-          <div hx-target="#mainContent" class="w-1/2 mx-auto">
-              <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
-                  Create new account
-              </h1>
-              <form hx-post="auth/register" class="space-y-4 md:space-y-6 mb-2" action="#">
-                  <div>
-                      <label for="username" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your username:</label>
-                      <input type="text" name="username" id="username" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg w-full" required="">
-                  </div>
-                  <div>
-                      <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password:</label>
-                      <input type="password" name="password" id="password" placeholder="••••••••" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg w-full" required="">
-                  </div>
-                   <div>
-                      <label for="openAIKey" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your openAIKey:</label>
-                      <input type="text" name="openAIKey" id="openAIKey" placeholder="sk-..." class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5" required="">
-                  </div>
-                  <button class="w-full text-white bg-primary-600 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Create an account</button>
-              </form>
-            <div hx-get="/loginView" hx-trigger="click">
-                     <p class="text-sm font-light w-full mx-auto">
-                      Already have an account? <a class="font-medium text-primary-600 hover:underline dark:text-primary-500">Login here</a>
-                  </p>
-            </div>
-          </div>
+<script>
+  document.body.addEventListener('htmx:afterRequest', function (evt) { 
+    const errorTarget = document.getElementById("htmx-alert"); 
+    if (evt.detail.successful) {
+      errorTarget.setAttribute("hidden", "true");
+      errorTarget.innerText = "";
+    }
+    else if (evt.detail.failed && evt.detail.xhr) {
+      const xhr = evt.detail.xhr;
+      const message = JSON.parse(xhr.response).error.message; 
+      errorTarget.innerText = `${message.toString()}`; 
+      errorTarget.removeAttribute("hidden");
+    }
+    else {
+      console.error("Unexpected htmx error", evt.detail);
+      errorTarget.innerText = "Unexpected error"; errorTarget.removeAttribute("hidden");
+    }
+  });
+</script>
+<div hx-target='#mainContent' class='w-1/2 mx-auto'>
+  <h1
+    class='text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white'
+  >
+    Create new account
+  </h1>
+  <form hx-post='auth/register' class='space-y-4 md:space-y-6 mb-2' action='#'>
+    <div>
+      <label
+        for='username'
+        class='block mb-2 text-sm font-medium text-gray-900 dark:text-white'
+      >Your username:</label>
+      <input
+        type='text'
+        name='username'
+        id='username'
+        class='bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg w-full'
+        required=''
+      />
+    </div>
+    <div>
+      <label
+        for='password'
+        class='block mb-2 text-sm font-medium text-gray-900 dark:text-white'
+      >Password:</label>
+      <input
+        type='password'
+        name='password'
+        id='password'
+        placeholder='••••••••'
+        class='bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg w-full'
+        required=''
+      />
+    </div>
+    <div>
+      <label
+        for='openAIKey'
+        class='block mb-2 text-sm font-medium text-gray-900 dark:text-white'
+      >Your openAIKey:</label>
+      <input
+        type='text'
+        name='openAIKey'
+        id='openAIKey'
+        placeholder='sk-...'
+        class='bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5'
+        required=''
+      />
+    </div>
+    <button
+      class='w-full text-white bg-primary-600 font-medium rounded-lg text-sm px-5 py-2.5 text-center'
+    >Create an account</button>
+    <div
+      id='htmx-alert'
+      hidden
+      class='bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative'
+      role='alert'
+    >
+    </div>
+  </form>
+  <div hx-get='/loginView' hx-trigger='click'>
+    <p class='text-sm font-light w-full mx-auto'>
+      Already have an account?
+      <a
+        class='font-medium text-primary-600 hover:underline dark:text-primary-500'
+      >Login here</a>
+    </p>
+  </div>
+</div>

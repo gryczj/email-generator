@@ -1,4 +1,8 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import {
+  ConflictException,
+  Injectable,
+  UnauthorizedException,
+} from '@nestjs/common';
 import * as bcrypt from 'bcrypt';
 import { UsersRepository } from './users.repository';
 import { LoginDTO, RegistrationDTO } from './dtos';
@@ -16,6 +20,10 @@ export class AuthService {
     password,
     openAIKey,
   }: RegistrationDTO): Promise<any> {
+    const user = await this.usersRepository.find(username);
+    if (user) {
+      throw new ConflictException('User with given username already exists.');
+    }
     const hash = await bcrypt.hash(password, 10);
     await this.usersRepository.save(username, hash, openAIKey);
   }
@@ -26,7 +34,7 @@ export class AuthService {
   }: LoginDTO): Promise<{ access_token: string }> {
     const user = await this.usersRepository.find(username);
     if (!user || !(await bcrypt.compare(password, user.pwd))) {
-      throw new UnauthorizedException();
+      throw new UnauthorizedException('Invalid username or password.');
     }
 
     const payload = { sub: user.user_id, username: user.username };
