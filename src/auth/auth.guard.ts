@@ -23,7 +23,7 @@ export class AuthGuard implements CanActivate {
       });
 
       request['user'] = payload;
-    } catch {
+          } catch {
       throw new UnauthorizedException();
     }
     return true;
@@ -34,8 +34,7 @@ export class AuthGuard implements CanActivate {
     const bearerToken =
       authorizationHeader[0] === 'Bearer' ? authorizationHeader[1] : undefined;
     const cookie = request.headers.cookie?.split('=') ?? [];
-    const accessToken = cookie[0] === 'accessToken' ? cookie[1] : undefined;
-
+    const accessToken = cookie[0] === 'access_token' ? cookie[1] : undefined;
     return bearerToken || accessToken;
   }
 }

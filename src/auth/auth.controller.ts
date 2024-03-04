@@ -38,23 +38,32 @@ export class AuthController {
   public async login(
     @Body() loginDTO: LoginDTO,
     @Res() res: Response,
-  ): Promise<void> {
+  ): Promise<any> {
     try {
       const token = await this.authService.login(loginDTO);
-      res.set('Authorization', 'Bearer ' + token.access_token);
-      res.render('email-form');
+      res.cookie('access_token', token.access_token, {
+        httpOnly: true,
+        secure: false,
+        sameSite: 'lax'
+    })
+      res.redirect('/generatorView');
     } catch (error) {
       res.status(401).json({ error });
       console.error(error);
     }
   }
 
+  @UseGuards(AuthGuard)
   @Get('logout')
   @HttpCode(HttpStatus.OK)
-  public async logout(@Res() res: Response): Promise<void> {
-    res.redirect('/');
+  public async logout(
+    @Res() res: Response,
+    ): Promise<void> {
+      res.clearCookie('access_token');
+      res.redirect('/');
   }
 
+  @UseGuards(AuthGuard)
   @Get('user-info')
   @HttpCode(HttpStatus.OK)
   public async getUserInfo(

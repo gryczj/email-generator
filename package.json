@@ -7,8 +7,10 @@
   "license": "UNLICENSED",
   "scripts": {
     "build": "nest build",
-    "format": "prettier --write \"src/**/*.ts\" \"views/**/*.hbs\"",
+    "format": "prettier --write \"src/**/*.ts\"",
+    "format:views": "prettier --write \"views/**/*.hbs\"",
     "start": "npx tailwindcss -i ./assets/tailwind.css -o ./public/main.css && nest start",
+    "create:css": "npx tailwindcss -i ./assets/tailwind.css -o ./public/main.css",
     "start:dev": "npx tailwindcss -i ./assets/tailwind.css -o ./public/main.css && nest start --watch",
     "start:debug": "nest start --debug --watch",
     "start:prod": "node dist/main",
