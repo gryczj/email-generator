@@ -1,18 +1,18 @@
 <script>
-    document.body.addEventListener('htmx:afterRequest', function (evt) { 
+  document.body.addEventListener('htmx:afterRequest', function (evt) { 
     const errorTarget = document.getElementById("htmx-alert"); 
     if (evt.detail.successful) {
       errorTarget.setAttribute("hidden", "true");
-      errorTarget.innerText = "";
+  errorTarget.innerText = "";
     }
     else if (evt.detail.failed && evt.detail.xhr) {
-      const xhr = evt.detail.xhr;
+  const xhr = evt.detail.xhr;
       const message = JSON.parse(xhr.response).error.message; 
       errorTarget.innerText = `${message.toString()}`; 
       errorTarget.removeAttribute("hidden");
     }
     else {
-      console.error("Unexpected htmx error", evt.detail);
+  console.error("Unexpected htmx error", evt.detail);
       errorTarget.innerText = "Unexpected error"; errorTarget.removeAttribute("hidden");
     }
   });
