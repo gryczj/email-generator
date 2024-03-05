@@ -15,9 +15,7 @@ async function bootstrap() {
   app.setViewEngine('hbs');
   app.enableCors({
     credentials: true,
-    origin: [
-      "http://localhost:3000",
-    ],
+    origin: ['http://localhost:3000'],
   });
   app.use(bodyParser.json());
   app.use(cookieParser());

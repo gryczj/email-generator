@@ -44,8 +44,8 @@ export class AuthController {
       res.cookie('access_token', token.access_token, {
         httpOnly: true,
         secure: false,
-        sameSite: 'lax'
-    })
+        sameSite: 'lax',
+      });
       res.redirect('/generatorView');
     } catch (error) {
       res.status(401).json({ error });
@@ -56,11 +56,9 @@ export class AuthController {
   @UseGuards(AuthGuard)
   @Get('logout')
   @HttpCode(HttpStatus.OK)
-  public async logout(
-    @Res() res: Response,
-    ): Promise<void> {
-      res.clearCookie('access_token');
-      res.redirect('/');
+  public async logout(@Res() res: Response): Promise<void> {
+    res.clearCookie('access_token');
+    res.redirect('/loginView');
   }
 
   @UseGuards(AuthGuard)

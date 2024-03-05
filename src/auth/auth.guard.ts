@@ -23,7 +23,7 @@ export class AuthGuard implements CanActivate {
       });
 
       request['user'] = payload;
-          } catch {
+    } catch {
       throw new UnauthorizedException();
     }
     return true;

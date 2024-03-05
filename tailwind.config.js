@@ -2,7 +2,7 @@ import colors from 'tailwindcss/colors';
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ['./views/*.hbs', './views/**/*.hbs'],
+  content: ['./views/*.hbs', './views/**/*.hbs', "./node_modules/flowbite/**/*.js"],
   theme: {
     screens: {
       sm: '480px',
