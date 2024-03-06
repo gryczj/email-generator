@@ -54,4 +54,8 @@ export class AuthService {
       openAIKey: user.open_ai_key,
     };
   }
+
+  async updateUser(username: string, openAIKey: string): Promise<void> {
+    await this.usersRepository.updateKey(username, openAIKey);
+  }
 }

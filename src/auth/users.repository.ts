@@ -38,4 +38,15 @@ export class UsersRepository {
       })
       .executeTakeFirst();
   }
+
+  async updateKey(username: string, key: string): Promise<void> {
+    await this.database
+      .updateTable('users')
+      .set({
+        open_ai_key: key,
+        updated_at: new Date(),
+      })
+      .where('username', '=', username)
+      .executeTakeFirst();
+  }
 }

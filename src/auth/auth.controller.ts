@@ -68,11 +68,37 @@ export class AuthController {
     @Res() res: Response,
     @Req() req: Request,
   ): Promise<void> {
-    const user = this.authService.getUserInfo(req['user'].username);
-
+    const user = await this.authService.getUserInfo(req['user'].username);
     res.render('user-info', {
       user,
     });
+  }
+
+  @UseGuards(AuthGuard)
+  @Get('user-edit')
+  public async userEdit(
+    @Res() res: Response,
+    @Req() req: Request,
+  ): Promise<void> {
+    const user = await this.authService.getUserInfo(req['user'].username);
+    res.render('user-form', {
+      user,
+    });
+  }
+
+  @Post('user-update')
+  @HttpCode(HttpStatus.OK)
+  public async userUpdate(
+    @Body() body: { openAIKey: string; username: string },
+    @Res() res: Response,
+  ): Promise<void> {
+    try {
+      await this.authService.updateUser(body.username, body.openAIKey);
+      res.redirect('/auth/user-info');
+    } catch (error) {
+      res.status(409).json({ error });
+      console.error(error);
+    }
   }
 
   @UseGuards(AuthGuard)
