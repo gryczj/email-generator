@@ -2,7 +2,7 @@ import { Body, Controller, Post, Res, UseGuards } from '@nestjs/common';
 import { Response } from 'express';
 import { EmailService } from './email.service';
 import { AnswerStyle } from 'src/enums';
-import { AuthGuard } from 'src/auth/auth.guard';
+import { AuthGuard } from 'src/user/auth.guard';
 
 @UseGuards(AuthGuard)
 @Controller('email')

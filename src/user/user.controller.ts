@@ -10,13 +10,13 @@ import {
   Res,
 } from '@nestjs/common';
 import { Request, Response } from 'express';
-import { AuthService } from './auth.service';
+import { UserService } from './user.service';
 import { LoginDTO, RegistrationDTO } from './dtos';
 import { AuthGuard } from './auth.guard';
 
-@Controller('auth')
-export class AuthController {
-  constructor(private authService: AuthService) {}
+@Controller('user')
+export class UserController {
+  constructor(private userService: UserService) {}
 
   @Post('register')
   @HttpCode(HttpStatus.OK)
@@ -25,7 +25,7 @@ export class AuthController {
     @Res() res: Response,
   ): Promise<void> {
     try {
-      await this.authService.register(registrationDTO);
+      await this.userService.register(registrationDTO);
       res.redirect('/loginView');
     } catch (error) {
       res.status(409).json({ error });
@@ -40,7 +40,7 @@ export class AuthController {
     @Res() res: Response,
   ): Promise<any> {
     try {
-      const token = await this.authService.login(loginDTO);
+      const token = await this.userService.login(loginDTO);
       res.cookie('access_token', token.access_token, {
         httpOnly: true,
         secure: false,
@@ -62,39 +62,28 @@ export class AuthController {
   }
 
   @UseGuards(AuthGuard)
-  @Get('user-info')
+  @Get()
   @HttpCode(HttpStatus.OK)
   public async getUserInfo(
     @Res() res: Response,
     @Req() req: Request,
   ): Promise<void> {
-    const user = await this.authService.getUserInfo(req['user'].username);
+    const user = await this.userService.getUserInfo(req['user'].username);
     res.render('user-info', {
       user,
     });
   }
 
   @UseGuards(AuthGuard)
-  @Get('user-edit')
-  public async userEdit(
-    @Res() res: Response,
-    @Req() req: Request,
-  ): Promise<void> {
-    const user = await this.authService.getUserInfo(req['user'].username);
-    res.render('user-form', {
-      user,
-    });
-  }
-
-  @Post('user-update')
+  @Post()
   @HttpCode(HttpStatus.OK)
   public async userUpdate(
     @Body() body: { openAIKey: string; username: string },
     @Res() res: Response,
   ): Promise<void> {
     try {
-      await this.authService.updateUser(body.username, body.openAIKey);
-      res.redirect('/auth/user-info');
+      await this.userService.updateUser(body.username, body.openAIKey);
+      res.redirect('/user');
     } catch (error) {
       res.status(409).json({ error });
       console.error(error);
@@ -102,8 +91,14 @@ export class AuthController {
   }
 
   @UseGuards(AuthGuard)
-  @Get('profile')
-  getProfile(@Req() req) {
-    return req.user;
+  @Get('editView')
+  public async userEdit(
+    @Res() res: Response,
+    @Req() req: Request,
+  ): Promise<void> {
+    const user = await this.userService.getUserInfo(req['user'].username);
+    res.render('user-form', {
+      user,
+    });
   }
 }

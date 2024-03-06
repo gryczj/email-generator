@@ -1,7 +1,7 @@
 import { Controller, Get, Req, UseGuards } from '@nestjs/common';
 import { OpenaiService } from './openai.service';
-import { UsersRepository } from 'src/auth/users.repository';
-import { AuthGuard } from 'src/auth/auth.guard';
+import { UsersRepository } from 'src/user/users.repository';
+import { AuthGuard } from 'src/user/auth.guard';
 
 @UseGuards(AuthGuard)
 @Controller('openai')

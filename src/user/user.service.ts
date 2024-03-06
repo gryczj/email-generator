@@ -9,7 +9,7 @@ import { LoginDTO, RegistrationDTO } from './dtos';
 import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
-export class AuthService {
+export class UserService {
   constructor(
     private usersRepository: UsersRepository,
     private jwtService: JwtService,

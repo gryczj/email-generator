@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ConfigModule } from '@nestjs/config';
-import { AuthModule } from './auth/auth.module';
+import { UserModule } from './user/user.module';
 import { PostgresDialect } from 'kysely';
 import { Pool } from 'pg';
 import { KyselyModule } from 'nestjs-kysely';
@@ -13,7 +13,7 @@ import { OpenaiModule } from './openai/openai.module';
 @Module({
   imports: [
     ConfigModule.forRoot(),
-    AuthModule,
+    UserModule,
     KyselyModule.forRoot({
       dialect: new PostgresDialect({
         pool: new Pool({
