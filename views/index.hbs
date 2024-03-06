@@ -18,11 +18,35 @@
   <body>
     <div id='app-content'>
       <div id='header-part' class='grid grid-rows-1 grid-cols-3'>
-        <div
-          hx-get='/defaultListView'
-          hx-trigger='load'
-          class='row-start-1 col-start-1'
-        >
+        <div class='row-start-1 col-start-1'>
+          <button
+            hx-get='/listView'
+            hx-trigger='click'
+            hx-target='#dropdown'
+            class='p-2 px-2 mt-0 self-center'
+            id='dropdownButton'
+            data-dropdown-toggle='dropdown'
+            type='button'
+          >
+            <svg
+              class='w-10 h-10 text-gray-800 dark:text-white'
+              aria-hidden='true'
+              xmlns='http://www.w3.org/2000/svg'
+              fill='none'
+              viewBox='0 0 24 24'
+            >
+              <path
+                stroke='currentColor'
+                stroke-linecap='round'
+                stroke-width='2'
+                d='M5 7h14M5 12h14M5 17h14'
+              />
+            </svg>
+          </button>
+          <div
+            id='dropdown'
+            class='z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700'
+          ></div>
         </div>
         <h2
           class='py-2 font-sans row-start-1 row-span-1 col-start-2 place-content-center self-center'

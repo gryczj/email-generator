@@ -1,57 +1,28 @@
-<button
-  hx-get='/listView'
-  hx-trigger='click'
-  hx-target='#dropdown'
-  class='p-2 px-2 mt-0 self-center'
-  id='dropdownButton'
-  data-dropdown-toggle='dropdown'
-  type='button'
+<ul
+  class='py-2 px-2 text-sm text-gray-700 dark:text-gray-200'
+  aria-labelledby='dropdownDefaultButton'
 >
-  <svg
-    class='w-10 h-10 text-gray-800 dark:text-white'
-    aria-hidden='true'
-    xmlns='http://www.w3.org/2000/svg'
-    fill='none'
-    viewBox='0 0 24 24'
+  <li
+    class='block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white'
+    hx-get='/loginView'
+    hx-trigger='click'
+    hx-target='#mainContent'
   >
-    <path
-      stroke='currentColor'
-      stroke-linecap='round'
-      stroke-width='2'
-      d='M5 7h14M5 12h14M5 17h14'
-    />
-  </svg>
-</button>
-<div
-  id='dropdown'
-  class='z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700'
->
-  <ul
-    class='py-2 px-2 text-sm text-gray-700 dark:text-gray-200'
-    aria-labelledby='dropdownDefaultButton'
-  >
-    <li
-      class='block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white'
-      hx-get='/loginView'
-      hx-trigger='click'
-      hx-target='#mainContent'
-    >
-      <div class='grid grid-cols-3 place-content-around'>
-        <a class='font-bold self-center col-span-2'>Log in</a>
-        <svg
-          class='h-8 w-8 text-black'
-          viewBox='0 0 24 24'
-          fill='none'
-          stroke='currentColor'
-          stroke-width='2'
-          stroke-linecap='round'
-          stroke-linejoin='round'
-        >
-          <path d='M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4' />
-          <polyline points='10 17 15 12 10 7' />
-          <line x1='15' y1='12' x2='3' y2='12' />
-        </svg>
-      </div>
-    </li>
-  </ul>
-</div>
+    <div class='grid grid-cols-3 place-content-around'>
+      <a class='font-bold self-center col-span-2'>Log in</a>
+      <svg
+        class='h-8 w-8 text-black'
+        viewBox='0 0 24 24'
+        fill='none'
+        stroke='currentColor'
+        stroke-width='2'
+        stroke-linecap='round'
+        stroke-linejoin='round'
+      >
+        <path d='M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4' />
+        <polyline points='10 17 15 12 10 7' />
+        <line x1='15' y1='12' x2='3' y2='12' />
+      </svg>
+    </div>
+  </li>
+</ul>

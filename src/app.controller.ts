@@ -1,16 +1,9 @@
-import {
-  Body,
-  Controller,
-  Get,
-  Param,
-  Render,
-  Req,
-  Res,
-  UseGuards,
-} from '@nestjs/common';
+import { Controller, Get, Render, Req, Res, UseGuards } from '@nestjs/common';
 import { Response } from 'express';
 import { AuthGuard } from './user/auth.guard';
+import { createParamDecorator } from '@nestjs/common';
 
+export const User = createParamDecorator((data, req) => req.user);
 @Controller()
 export class AppController {
   constructor() {}
@@ -35,14 +28,15 @@ export class AppController {
     res.render('email-form');
   }
 
-  @Get('defaultListView')
-  public async defaultListView(@Res() res: Response): Promise<void> {
-    res.render('list-unauthenticated');
-  }
-
-  @UseGuards(AuthGuard)
   @Get('listView')
-  public async listView(@Res() res: Response): Promise<void> {
-    res.render('list-authenticated');
+  public async listView(
+    @Req() req: Request,
+    @Res() res: Response,
+  ): Promise<void> {
+    if (req.headers['cookie']) {
+      res.render('list-authenticated');
+    } else {
+      res.render('list-unauthenticated');
+    }
   }
 }
