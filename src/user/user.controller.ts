@@ -58,7 +58,7 @@ export class UserController {
   @HttpCode(HttpStatus.OK)
   public async logout(@Res() res: Response): Promise<void> {
     res.clearCookie('access_token');
-    res.render('index');
+    res.redirect('/loginView');
   }
 
   @UseGuards(AuthGuard)

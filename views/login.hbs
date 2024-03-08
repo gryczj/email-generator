@@ -1,9 +1,6 @@
 <script>
     document.body.addEventListener('htmx:afterRequest', function (evt) { 
     const errorTarget = document.getElementById("htmx-alert"); 
-    if(!errorTarget) {
-      return;
-    } 
     if (evt.detail.successful) {
       errorTarget.setAttribute("hidden", "true");
       errorTarget.innerText = "";

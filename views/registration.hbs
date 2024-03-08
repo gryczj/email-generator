@@ -1,9 +1,6 @@
 <script>
-  document.body.addEventListener('htmx:afterRequest', function (evt) { 
-    const errorTarget = document.getElementById("htmx-alert");
-    if(!errorTarget) {
-      return;
-    } 
+    document.body.addEventListener('htmx:afterRequest', function (evt) { 
+    const errorTarget = document.getElementById("htmx-alert"); 
     if (evt.detail.successful) {
       errorTarget.setAttribute("hidden", "true");
       errorTarget.innerText = "";
@@ -15,7 +12,7 @@
       errorTarget.removeAttribute("hidden");
     }
     else {
-  console.error("Unexpected htmx error", evt.detail);
+      console.error("Unexpected htmx error", evt.detail);
       errorTarget.innerText = "Unexpected error"; errorTarget.removeAttribute("hidden");
     }
   });
