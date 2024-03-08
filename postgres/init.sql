@@ -8,5 +8,5 @@ CREATE TABLE users (
 );
 
 INSERT INTO users(user_id, username, pwd, open_ai_key, created_at, updated_at) VALUES(
-  '3768d96d-fe14-4d2d-8e31-95b5f8c6603a', 'john.doe@gmail.com', 'pwd', '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', '2024-02-19 10:23:54', '2024-02-19 10:23:54'
+  '3768d96d-fe14-4d2d-8e31-95b5f8c6603a', 'john.doe@gmail.com', 'pwd', 'sk-zhxhxhsjsjsjsjsjsj', '2024-02-19 10:23:54', '2024-02-19 10:23:54'
 );
